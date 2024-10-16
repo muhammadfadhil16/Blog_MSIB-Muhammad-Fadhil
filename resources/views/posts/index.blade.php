@@ -47,6 +47,10 @@
                                 <a href="{{ route('posts.show', $post->id) }}" class="text-decoration-none">{{ $post->title }}</a>
                             </h5>
                             <p class="mb-1 text-muted">Category: {{ $post->category->name }}</p>
+                            <p class="mb-1 text-muted">
+                                Author: {{ $post->user ? $post->user->name : 'Unknown' }}
+                            </p>
+
                             <p class="mb-0">
                                 <span class="badge {{ $post->is_published ? 'bg-success' : 'bg-secondary' }}">
                                     {{ $post->is_published ? 'Published' : 'Draft' }}

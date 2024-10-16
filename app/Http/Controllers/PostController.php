@@ -7,11 +7,14 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     public function index(Request $request)
     {
+
+        $posts = Post::with('user')->get();
         // Ambil semua kategori
         $categories = Category::all();
 
@@ -54,7 +57,8 @@ class PostController extends Controller
 
         try {
             $postData = $request->all();
-            $postData['is_published'] = $request->has('is_published'); // Mengatur status publish
+            $postData['is_published'] = $request->input('is_published') == '1'; // Mengatur status publish
+            $postData['user_id'] = Auth::id();
 
             // Handle image upload
             if ($request->hasFile('image')) {
@@ -108,7 +112,7 @@ class PostController extends Controller
             $post->fill($postData);
 
             // Update status publish secara eksplisit
-            $post->is_published = $request->has('is_published'); // Tidak perlu ? true : false
+            $post->is_published = $request->input('is_published') == '1';  // Tidak perlu ? true : false
 
             // Simpan perubahan
             $post->save();

@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
 return new class extends Migration
 {
     /**
@@ -19,6 +18,7 @@ return new class extends Migration
             $table->string('image')->nullable(); // Kolom untuk menyimpan gambar, opsional
             $table->boolean('is_published')->default(false); // Status apakah post sudah dipublish
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade'); // Foreign key ke tabel categories
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key ke tabel users untuk author
             $table->timestamps(); // Kolom untuk created_at dan updated_at
         });
     }
@@ -30,5 +30,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('posts');
     }
-
 };

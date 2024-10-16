@@ -7,7 +7,7 @@
 <div class="container mt-4">
     <h2 class="text-3xl font-semibold mb-4">Create Post</h2>
 
-    @if (session('success'))
+    {{-- @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -19,7 +19,7 @@
             {{ session('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    @endif
+    @endif --}}
 
     <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data" class="bg-light p-4 rounded shadow">
         @csrf
